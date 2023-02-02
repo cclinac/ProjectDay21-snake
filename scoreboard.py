@@ -12,7 +12,9 @@ class Scoreboard(Turtle):
         self.color("white")
         self.penup()
         self.hideturtle()
-        self.high_score = 0
+        with open("data.txt") as file:
+            self.high_score = int(file.read())
+
         self.update_scoreboard()
 
     def reset_scoreboard(self):
@@ -30,6 +32,8 @@ class Scoreboard(Turtle):
         self.update_scoreboard()
         self.goto(0, 0)
         self.write("GAME OVER", align=ALIGNMENT, font=FONT)
+        with open("data.txt", mode="w") as file:
+            file.write(f"{self.high_score}")
         time.sleep(3)
         self.clear()
 
